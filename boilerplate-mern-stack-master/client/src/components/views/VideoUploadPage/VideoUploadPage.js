@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Typography, Button, Form, message, Input, Icon } from 'antd';
 import Dropzone from 'react-dropzone';
 import Axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const { TextArea } = Input;
 const { Title } = Typography;
@@ -21,7 +22,7 @@ const CategoryOptions = [
 
 
 function VideoUploadPage() {
-
+    const user = useSelector(state => state.user);
     const [VideoTitle, setVideoTitle] = useState("")
     const [Description, setDescription] = useState("")
     const [Private, setPrivate] = useState(0)
@@ -45,12 +46,12 @@ function VideoUploadPage() {
 
     const onDrop = (files) => {
 
-        let formData = new FormData();
+
+        let formData = new FormData;
         const config = {
             header: {'content-type': 'multipart/form-data'}
         }
-        formData.append("files", files[0])
-        console.log(config)
+        formData.append("file", files[0])
 
         Axios.post('/api/video/uploadfiles', formData, config)
         .then(response => {
@@ -60,12 +61,24 @@ function VideoUploadPage() {
                 alert('비디오 업로드를 실패했습니다.')
             }
         })
+    }
 
 
+    const onSumit = (e) => {
+        e.preventDefault();
 
+        const variables = {
+            writer: ,
+            title: ,
+            description: ,
+            privacy: ,
+            filePath: ,
+            category: ,
+            duration: ,
+            thumbnail: ,
+        }
 
-
-        
+        Axios.post('/api/video/uploadVideo', variables)
     }
 
     return (
@@ -74,7 +87,7 @@ function VideoUploadPage() {
                 <Title level={2}>Upload Video</Title>
             </div>
 
-            <Form>
+            <Form onSubmit={onSumit}>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                     {/* Drop Zone */}
 
@@ -87,7 +100,7 @@ function VideoUploadPage() {
                             <div style={{
                                 width: '300px', height: '240px', border: '1px solid lightgray', display: 'flex',
                                 alignItems: 'center', justifyContent: 'center'
-                            }} {...getRootProps()}>
+                            }} {...getRootProps()}> 
                                 <input {...getInputProps()} />
                                 <Icon type="plus" style={{ fontSize: '3rem' }} />
                             </div>
@@ -132,7 +145,7 @@ function VideoUploadPage() {
                 </select>
                 <br />
                 <br />
-                <Button type="primary" size="large">
+                <Button type="primary" size="large" onClick={onSumit}>
                     submit
                 </Button>
 
