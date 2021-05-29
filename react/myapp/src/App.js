@@ -1,36 +1,23 @@
-import { useSelector, useDispatch } from "react-redux";
 
 function App() {
-	const dispatch = useDispatch()
+	function printHello(callback) {
+		setTimeout(() => {
+			console.log("hello")
+			callback()
+		}, 1000);
+	}
 
-	const { value } = useSelector(state => state.value)
-	const { count } = useSelector(state => state.count)
-
-	const addValue = () => {
-		dispatch({ type: 'increment' })
+	function printDelete() {
+		console.log("delete")
 	}
-	const subValue = () => {
-		dispatch({ type: 'decrement' })
-	}
-	const resetValue = () => {
-		dispatch({ type: 'reset' })
-	}
-	const pushButton = () => {
-		dispatch({ type: 'push' })
+	function click() {
+		console.log("create")
+		printHello(printDelete)
 	}
 
 	return (
 		<div className="App">
-			<div>
-				value: {value}
-			</div>
-			<button onClick={addValue}> + </button>
-			<button onClick={subValue}> - </button>
-			<button onClick={resetValue}> reset </button>
-			<div>
-				count: {count}
-			</div>
-			<button onClick={pushButton}> click </button>
+			<button onClick={click}>button</button>
 		</div>
 	);
 }
