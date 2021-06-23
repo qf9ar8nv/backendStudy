@@ -16,6 +16,7 @@ r = soup.select('.yuRUbf')
 for i in r:
     print(i.select_one('.LC20lb.DKV0Md').text)
     print(i.select_one('.iUh30.Zu0yb.qLRx3b.tjvcx').text)
+    print(i.a.attrs['href'])
     print()
 
 driver.close()
