@@ -14,5 +14,5 @@ soup = BeautifulSoup(res.text, "lxml")
 # print(soup.find(attrs={"class":"Nbtn_upload"}))
 
 # print(soup.find("li", attrs={"class":"rank01"}))
-rank1 = soup.find("li", attrs={"class":"rank01"})
-print(rank1.a)
+# rank1 = soup.find("li", attrs={"class":"rank01"})
+# print(rank1.a)
